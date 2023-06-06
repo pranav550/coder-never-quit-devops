@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:6.0.5
+    volumes:
+      - mongodbdata:/data/db
+    networks:
+      - mern-net
+    env_file:
+      - ./env/mongo.env
+    container_name: mongodb
+  server:
+    build:
+      context: ./API-jokes
+      dockerfile: Dockerfile
+    volumes:
+      - ./API-jokes:/app
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongodb
+    networks:
+      - mern-net
+    env_file:
+      - ./env/server.env    
+    container_name: server
+  client:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./jokes-client
+      dockerfile: Dockerfile
+    volumes:
+      - ./jokes-client/src:/app/src
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+    networks:
+      - mern-net  
+    container_name: client
+
+
+volumes:
+  mongodbdata:
+networks:
+  mern-net:
+
+

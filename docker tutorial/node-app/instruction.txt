@@ -1,0 +1,80 @@
+#build docker image
+docker image build -t my-node-img .
+
+#build docker image add tag
+docker image build -t my-node-img:1.0.0 .
+
+docker images
+#docker image list
+docker image ls
+
+#Create and run a new container from an image
+docker container run my-node-img
+
+#docker container list
+docker container ls -a
+
+#start the container
+docker container start d4b733c7e868
+
+#Execute a command in a running container
+docker exec -it d4b733c7e868 sh
+
+#Stop the running container
+docker container stop d4b733c7e868
+
+#Stop the running container
+docker container kill d4b733c7e868
+
+#Create and run a new container from an image with detach mode and container name
+docker container run -d --name c1 my-node-img
+
+#check docker logs
+docker logs c1 -n 2
+
+docker container stop c1
+
+docker container start c1
+
+docker image build -t my-node-img .
+
+#Create and run a new container from an image with detach mode and container name and port no.
+docker container run -d -p 5000:5000 --name c2 my-node-img
+
+#Removes all stopped containers.
+docker container prune
+
+#Remove all dangling images.
+docker image prune
+
+#Remove all unused containers, networks, images (both dangling and unreferenced),volumes.
+docker system prune -a
+
+
+#To push a image in docker hub
+1)create an account of doxker hub
+2)create a repository
+3)type name there my-node-app
+4)run a command: docker image build -t pranavv481/my-node-app:1.0.0 .
+5)before pushing docker login if u r not login: docker login  
+6)docker push pranavv481/my-node-app:1.0.0
+
+#To pull image in from docker hub
+1)docker pull pranavv481/my-node-app:1.0.0
+2)docker container run -d -p 5000:5000 --name c2 pranavv481/my-node-app:1.0.0
+3)docker container start c2
+4)docker container stop c2
+5)docker system prune -a
+
+#Docker Compose:collection of container
+1)docker-compose up:If image is not exist then image is build and image run in one container
+2)docker-compose up -d:If image is not exist then image is build and image run in one container container run in detach mode
+3)docker-compose ps:check list
+4)docker-compose build:only build an image
+5)docker-compose down: docker container stop and removed
+
+#Docker Volume: It is exist outside  the container. It data is remain persist(permanent) after constainer stop
+
+#Docker run on prod:docker-compose -f docker-compose.prod.yaml up -d
+
+

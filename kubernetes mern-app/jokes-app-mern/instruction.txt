@@ -1,0 +1,61 @@
+node:-
+# build image of node api
+docker image build -t pranavv481/jokes-api "jokes-app-mern/API-jokes"
+
+# push an image
+docker push pranavv481/jokes-api
+
+#create pod/service/deployment of mongo
+kubectl apply -f "jokes-app-mern/jokes-db/k8s"
+
+#create pod/service/deployment of node
+kubectl apply -f "jokes-app-mern/API-jokes/k8s"
+
+#get all Pods
+kubectl get pods
+
+#check logs
+kubectl logs pod name
+
+#api-jokes deployment delete
+kubectl delete -f "jokes-app-mern/API-jokes/k8s"
+
+#api-jokes deployment create
+kubectl apply -f "jokes-app-mern/API-jokes/k8s"
+
+React:-
+# build image for react
+docker image build -t pranavv481/jokes-client "jokes-app-mern/jokes-client"
+
+#push an react image
+docker push pranavv481/jokes-client
+
+#create deployment for react
+kubectl apply -f "jokes-app-mern/jokes-client/k8s"
+
+node:-
+# build image of node api
+docker image build -t pranavv481/jokes-api:2 "jokes-app-mern/API-jokes"
+
+# push an image
+docker push pranavv481/jokes-api:2
+
+#create pod/service/deployment of node
+kubectl apply -f "jokes-app-mern/API-jokes/k8s"
+
+mongo:-
+
+#create pod/service/deployment of mongo
+kubectl apply -f "jokes-app-mern/jokes-db/k8s"
+
+#get storage class
+kubectl get sc
+
+# clean workspace
+kubectl delete all --all
+
+
+
+
+
+

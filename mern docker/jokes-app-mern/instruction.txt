@@ -1,0 +1,31 @@
+# create mongodb container with image
+1)docker container run --name mongoc1 -d mongo:6.0.5
+2)docker container run --name mongoc1 -p 8000:27017 -d mongo:6.0.5
+
+#find ip Address
+docker container inspect mongoc1
+
+# create node run in container with image
+1)docker image build -t node-api ./api-jokes
+2)docker image ls
+3)docker container run --name nodec1 -d node-api
+
+# create docker network 
+1)docker network create mern-net
+2)docker network ls
+
+3)docker container run --name mongodb --network mern-net -d mongo:6.0.5
+
+4)docker image build -t node-api ./api-jokes
+5)docker container run --name nodec1 --network mern-net -d node-api
+
+#Run the application
+# docker compose
+docker container run --name mongoc1 -d mongo:6.0.5
+docker-compose up -d
+
+#if error
+docker-compose down
+remove volumes
+
+

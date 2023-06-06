@@ -1,0 +1,30 @@
+#To deploy Dashboard, execute following command:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+# To access Dashboard from your local workstation you must create a secure channel to your Kubernetes cluster. Run the following command:
+kubectl proxy
+
+kubectl apply -f Dashboard.yaml
+
+#Getting a Bearer Token
+kubectl -n kubernetes-dashboard create token admin-user
+
+kubectl delete pod pod-name
+
+
+
+docker image build -t pranavv481/simple-app "./simple node app"
+docker push pranavv481/simple-app
+kubectl apply -f "./simple node app/k8s/simpleapp.pod.yaml"
+kubectl get pods
+
+kubectl apply -f "./simple node app/k8s/simpleapp-service.yaml"
+kubectl get services
+kubectl delete service servicename
+kubectl delete pod podname
+kubectl delete -f "./simple node app/k8s/simpleapp.pod.yaml"
+kubectl delete -f "./simple node app/k8s/simpleapp-service.yaml"
+
+kubectl apply -f "./simple node app/k8s/simpleapp-deployment.yaml"
+kubectl apply -f "./simple node app/k8s/simpleapp-service.yaml"
+kubectl get pods
